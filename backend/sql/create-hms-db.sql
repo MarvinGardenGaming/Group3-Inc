@@ -1,7 +1,6 @@
 /*
 	Creates the database and adds a user with global privileges on the database.
 */
-DROP DATABASE HMS_DB;
 CREATE DATABASE HMS_DB;
 
 /*

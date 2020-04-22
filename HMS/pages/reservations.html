@@ -10,6 +10,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	<script src="../js/nav.js"></script>
 	<script src="../js/auth.js"></script>
+	<script src="../js/reciept.js"></script>
 </head>
 <body>
 <!-------------Navigation Bar---------------------------->
@@ -219,7 +220,7 @@
 			<div class="col-md-6">
 			<span style="color: red">* </span><input type="text" name="FirstName" size="24" placeholder="First Name"><br/>
 			<br/>
-			<span style="color: red">* </span><input type="text" name="Email" size="24" placeholder="Email"><br/>
+			<span style="color: red">* </span><input id="kingGuestEmail" type="text" name="Email" size="24" placeholder="Email"><br/>
 			<br/>
 			<span style="color: red">* </span><input type="text" name="Address" size="24" placeholder="Address"><br/>
 			<br/>
@@ -317,7 +318,7 @@
 <br/>
 <section class="confirm">
 	<div class="booked">
-		<button class="confirmbooking" style="width:200px">CONFIRM BOOKING</button>
+		<button onclick="sendEmail()" class="confirmbooking" style="width:200px">CONFIRM BOOKING</button>
 	</div>
 </section>
 
@@ -400,7 +401,7 @@
 			<div class="col-md-6">
 			<span style="color: red">* </span><input type="text" name="FirstName" size="24" placeholder="First Name"><br/>
 			<br/>
-			<span style="color: red">* </span><input type="text" name="Email" size="24" placeholder="Email"><br/>
+			<span style="color: red">* </span><input id="queenGuestEmail" type="text" name="Email" size="24" placeholder="Email"><br/>
 			<br/>
 			<span style="color: red">* </span><input type="text" name="Address" size="24" placeholder="Address"><br/>
 			<br/>
@@ -498,7 +499,7 @@
 <br/>
 <section class="confirm">
 	<div class="booked">
-		<button class="confirmbooking" style="width:200px">CONFIRM BOOKING</button>
+		<button onclick="sendEmail()" class="confirmbooking" style="width:200px">CONFIRM BOOKING</button>
 	</div>
 </section>
 

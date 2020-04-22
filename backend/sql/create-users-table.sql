@@ -4,8 +4,6 @@
 */
 USE HMS_DB;
 
-DROP TABLE users;
-
 CREATE TABLE users (
 	username VARCHAR(25) PRIMARY KEY,
 	password VARCHAR(80) NOT NULL
