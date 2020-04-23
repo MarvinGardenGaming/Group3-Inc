@@ -5,13 +5,14 @@ const db = require('../db/db');
 
 module.exports = {
   authenticate,
-  verify
+  verify,
+  hashPassword
 };
 
 // Verifies the provided username and password match a user in the database and resolves
 // with a new JWT
 function authenticate(username, password) {
-  const query = "SELECT * FROM users WHERE username=?"
+  const query = "SELECT username,password,role FROM users WHERE username=?"
   const values = [username];
   return new Promise(resolve => {
     db.query(query, values,
@@ -23,8 +24,8 @@ function authenticate(username, password) {
             if(user) {
               bcrypt.compare(password, user.password, function (err, result) {
                 if (result === true) {
-                  const token = getToken(user.username);
-                  resolve({username: user.username, token: token});
+                  const token = getToken(user.username, user.role);
+                  resolve({username: user.username, role: user.role, token: token});
                 } else {
                   resolve();
                 }
@@ -53,19 +54,20 @@ function verify(username, password) {
   });
 }
 
-// Returns a new JWT with a 30 minute expiration
-function getToken(username) {
-  var payload;
-  if(username === 'admin') {
-    payload = {
-      sub: username,
-      permissions: ['admin']
-    };
-  } else {
-    payload = {
-      sub: username,
-      permissions: ['user']
-    }
-  }
-  return jwt.sign(payload, config.secret, {expiresIn: 60 * 30});
+// Returns a new JWT with a 20 minute expiration
+function getToken(username, role) {
+  var permission = (role === 'admin') ? 'admin' : 'user';
+  var payload = {
+    sub: username,
+    permissions: [permission]
+  };
+  return jwt.sign(payload, config.secret, {expiresIn: config.timeout});
 }
+
+// Returns hash of the provided password
+function hashPassword(password) {
+  return (password) ? bcrypt.hashSync(password, 10) : null;
+}
+
+
+
